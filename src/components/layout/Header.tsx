@@ -1,21 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Search, User, Menu } from "lucide-react";
+import { ShoppingCart, Search, Heart, Menu, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { useState } from "react";
+import { SheetSimple } from "@/components/ui/sheet-simple";
+import { useRouter } from "next/navigation";
 
 export function Header() {
     const { cartCount } = useCart();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const router = useRouter();
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            router.push(`/shop?search=${encodeURIComponent(searchQuery)}`);
+            setIsSearchOpen(false);
+        }
+    };
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/60 backdrop-blur-md supports-[backdrop-filter]:bg-background/40 shadow-sm transition-all duration-300">
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
                 {/* Mobile Menu */}
-                <Button variant="ghost" size="icon" className="md:hidden">
+                <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(true)}>
                     <Menu className="h-6 w-6" />
                     <span className="sr-only">Menu</span>
                 </Button>
+
+                <SheetSimple
+                    isOpen={isMobileMenuOpen}
+                    onClose={() => setIsMobileMenuOpen(false)}
+                    side="left"
+                    title="Menu"
+                >
+                    <nav className="flex flex-col gap-4 mt-4">
+                        {["Home", "Groceries", "Our Story", "Contact"].map((item) => (
+                            <Link
+                                key={item}
+                                href={item === "Home" ? "/" : item === "Groceries" ? "/shop" : `/${item.toLowerCase().replace(" ", "-")}`}
+                                className="text-lg font-medium py-2 border-b border-border/50 hover:text-primary transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {item}
+                            </Link>
+                        ))}
+                    </nav>
+                </SheetSimple>
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
@@ -40,14 +75,39 @@ export function Header() {
 
                 {/* Actions */}
                 <div className="flex items-center gap-2 md:gap-4">
-                    <Button variant="ghost" size="icon" className="hidden sm:flex">
-                        <Search className="h-5 w-5" />
-                        <span className="sr-only">Search</span>
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                        <User className="h-5 w-5" />
-                        <span className="sr-only">Account</span>
-                    </Button>
+                    {isSearchOpen ? (
+                        <form onSubmit={handleSearch} className="relative hidden sm:block animate-in fade-in slide-in-from-right-4">
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                className="h-9 w-40 lg:w-64 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                autoFocus
+                                onBlur={() => !searchQuery && setIsSearchOpen(false)}
+                            />
+                        </form>
+                    ) : (
+                        <Button variant="ghost" size="icon" className="hidden sm:flex" onClick={() => setIsSearchOpen(true)}>
+                            <Search className="h-5 w-5" />
+                            <span className="sr-only">Search</span>
+                        </Button>
+                    )}
+
+                    <Link href="/orders">
+                        <Button variant="ghost" size="icon" className="hidden sm:flex">
+                            <User className="h-5 w-5" />
+                            <span className="sr-only">Orders</span>
+                        </Button>
+                    </Link>
+
+                    <Link href="/wishlist">
+                        <Button variant="ghost" size="icon" className="hidden sm:flex">
+                            <Heart className="h-5 w-5" />
+                            <span className="sr-only">Wishlist</span>
+                        </Button>
+                    </Link>
+
                     <Link href="/cart">
                         <Button variant="ghost" size="icon" className="relative">
                             <ShoppingCart className="h-5 w-5" />

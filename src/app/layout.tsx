@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { ToastProvider } from "@/context/ToastContext";
+import { WishlistProvider } from "@/context/WishlistContext";
+import { OrderProvider } from "@/context/OrderContext";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -41,13 +44,19 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${playfair.variable} ${inter.variable} antialiased bg-background text-foreground flex flex-col min-h-screen`}
       >
-        <CartProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </CartProvider>
+        <ToastProvider>
+          <WishlistProvider>
+            <OrderProvider>
+              <CartProvider>
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </CartProvider>
+            </OrderProvider>
+          </WishlistProvider>
+        </ToastProvider>
       </body>
     </html>
   );

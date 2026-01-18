@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { useToast } from "@/context/ToastContext";
 import Image from "next/image";
 
 interface ProductCardProps {
@@ -20,10 +22,12 @@ interface ProductCardProps {
 
 export function ProductCard(props: ProductCardProps) {
     const { addToCart } = useCart();
+    const { toggleWishlist, isInWishlist } = useWishlist();
+    const { showToast } = useToast();
     const { id, name, price, image, category, isNew } = props;
 
     const handleAddToCart = (e: React.MouseEvent) => {
-        e.preventDefault(); // Prevent navigation if clicked on cart
+        e.preventDefault();
         addToCart({
             id,
             name,
@@ -35,7 +39,16 @@ export function ProductCard(props: ProductCardProps) {
             originalPrice: props.originalPrice || price,
             discountPercentage: props.discountPercentage || 0
         });
+        showToast(`Added ${name} to cart`);
     };
+
+    const handleWishlistClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleWishlist({ ...props } as any); // Casting since Product interface might match
+    };
+
+    const isLiked = isInWishlist(id);
 
     return (
         <div className="group relative bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
@@ -57,9 +70,14 @@ export function ProductCard(props: ProductCardProps) {
                     />
                 </Link>
                 {/* Quick Actions overlay */}
-                <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full">
-                        <Heart className="h-4 w-4" />
+                <div className="absolute right-3 top-3 flex flex-col gap-2 z-20">
+                    <Button
+                        size="icon"
+                        variant="secondary"
+                        className={`h-8 w-8 rounded-full transition-all duration-300 ${isLiked ? 'opacity-100 bg-red-50 text-red-500 hover:bg-red-100' : 'opacity-0 group-hover:opacity-100'}`}
+                        onClick={handleWishlistClick}
+                    >
+                        <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
                         <span className="sr-only">Add to Wishlist</span>
                     </Button>
                 </div>

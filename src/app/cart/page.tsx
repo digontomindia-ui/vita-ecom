@@ -114,9 +114,11 @@ export default function CartPage() {
                             </div>
                         </div>
 
-                        <Button className="w-full text-lg h-12" size="lg">
-                            Checkout <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
+                        <Link href="/checkout" className="block w-full">
+                            <Button className="w-full text-lg h-12" size="lg">
+                                Checkout <ArrowRight className="ml-2 w-4 h-4" />
+                            </Button>
+                        </Link>
 
                         <p className="text-xs text-center text-muted-foreground mt-4">
                             Secure checkout powered by Stripe
