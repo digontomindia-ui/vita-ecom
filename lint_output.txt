@@ -1,0 +1,55 @@
+
+> vitanova-ecom@0.1.0 lint
+> eslint
+
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/app/cart/page.tsx
+  15:87  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  36:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/app/product/[id]/page.tsx
+   8:26  warning  'getAllProducts' is defined but never used                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  10:11  warning  'PageProps' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  47:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/components/groceries/AddToCartButton.tsx
+  97:5  error  Error: Calling setState during render may trigger an infinite loop
+
+Calling setState during render will trigger another render, and can lead to infinite loops. (https://react.dev/reference/react/useState).
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/components/groceries/AddToCartButton.tsx:97:5
+   95 |         addToCart(product);
+   96 |     }
+>  97 |     setQuantity(1);
+      |     ^^^^^^^^^^^ Found setState() in render
+   98 |
+   99 |     return (
+  100 |         <div className="flex items-center gap-4">  react-hooks/set-state-in-render
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/components/groceries/CategoryGrid.tsx
+   3:10  warning  'cn' is defined but never used                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  44:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/components/groceries/ProductCard.tsx
+  35:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/context/CartContext.tsx
+  28:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/madhusudanmahatha/VitaNova-ecom/src/context/CartContext.tsx:28:9
+  26 |     // Load from local storage on mount
+  27 |     useEffect(() => {
+> 28 |         setIsMounted(true);
+     |         ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  29 |         const savedCart = localStorage.getItem("vitanova_cart");
+  30 |         if (savedCart) {
+  31 |             try {  react-hooks/set-state-in-effect
+
+✖ 10 problems (3 errors, 7 warnings)
+

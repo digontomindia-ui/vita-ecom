@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Vita Nova Care - Brand Palette (Premium) */
+  /* Primary: Rich Jungle Green (#0C3B2E) - Deeper, more authoritative */
+  /* Secondary: Antique Gold (#C5A028) - Less yellow, more metallic */
+
+  --background: #fdfbf7;
+  /* Warm off-white, paper-like */
+  --foreground: #0C3B2E;
+
+  --card: #ffffff;
+  --card-foreground: #0C3B2E;
+
+  --popover: #ffffff;
+  --popover-foreground: #0C3B2E;
+
+  --primary: #0C3B2E;
+  --primary-foreground: #ffffff;
+
+  --secondary: #C5A028;
+  --secondary-foreground: #ffffff;
+
+  --muted: #f0fdf4;
+  --muted-foreground: #526b63;
+
+  --accent: #E8F5E9;
+  --accent-foreground: #0C3B2E;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #dbe4de;
+  --input: #dbe4de;
+  --ring: #C5A028;
+
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #051f17;
+    /* Very dark green, almost black */
+    --foreground: #E8F5E9;
+
+    --card: #0C3B2E;
+    --card-foreground: #E8F5E9;
+
+    --popover: #0C3B2E;
+    --popover-foreground: #E8F5E9;
+
+    --primary: #C5A028;
+    /* Gold pops on dark */
+    --primary-foreground: #0C3B2E;
+
+    --secondary: #0C3B2E;
+    --secondary-foreground: #C5A028;
+
+    --muted: #0f4e3b;
+    --muted-foreground: #9ca3af;
+
+    --accent: #104033;
+    --accent-foreground: #C5A028;
+
+    --destructive: #7f1d1d;
+    --destructive-foreground: #fcfbf9;
+
+    --border: #1f4e3b;
+    --input: #1f4e3b;
+    --ring: #C5A028;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
