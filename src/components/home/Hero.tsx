@@ -1,19 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
     return (
-        <section className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden bg-primary">
-            {/* Background Overlay/Image Placeholder */}
+        <div className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 z-0">
-                {/* Gradient overlay for depth - Richer Jungle Green fade */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-black/60 z-10 mix-blend-multiply" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-
-                {/* Background Image with Slow Zoom Effect */}
-                <div
-                    className="w-full h-full bg-[url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-overlay animate-in zoom-in-110 duration-[20s]"
-                    aria-hidden="true"
+                {/* Gradient overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-black/40 z-10 mix-blend-multiply" />
+                <Image
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop"
+                    alt="Organic fresh food background"
+                    fill
+                    priority
+                    className="object-cover opacity-60 animate-in zoom-in-110 duration-[20s]"
+                    sizes="100vw"
                 />
             </div>
 
@@ -36,8 +37,7 @@ export function Hero() {
                 </div>
             </div>
 
-            {/* Decorative Leaf/Organic Element (CSS Shape) */}
             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent z-20" />
-        </section>
+        </div>
     );
 }

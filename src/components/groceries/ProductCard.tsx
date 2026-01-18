@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import Image from "next/image";
 
 interface ProductCardProps {
     id: string;
@@ -44,11 +45,15 @@ export function ProductCard(props: ProductCardProps) {
                         {props.discountPercentage}% OFF
                     </span>
                 )}
+                {/* ... inside component ... */}
+
                 <Link href={`/product/${props.id}`}>
-                    <img
+                    <Image
                         src={props.image}
                         alt={props.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 </Link>
                 {/* Quick Actions overlay */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const categories = [
@@ -44,10 +45,12 @@ export function CategoryGrid() {
                             href={cat.href}
                             className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-muted"
                         >
-                            <img
+                            <Image
                                 src={cat.image}
                                 alt={cat.name}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                sizes="(max-width: 768px) 100vw, 33vw"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 

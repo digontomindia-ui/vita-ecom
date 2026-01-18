@@ -18,8 +18,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vita Nova Care | Premium Groceries",
-  description: "Experience the finest organic groceries for a revitalized life.",
+  title: {
+    template: "%s | Vita Nova Care",
+    default: "Vita Nova Care | Premium Organic Groceries",
+  },
+  description: "Experience the finest organic groceries for a revitalized life. Sustainably sourced, premium quality from farm to table.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Vita Nova Care",
+  },
 };
 
 export default function RootLayout({
