@@ -9,7 +9,7 @@ export function Header() {
     const { cartCount } = useCart();
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-secondary/30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm transition-all duration-300">
+        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/60 backdrop-blur-md supports-[backdrop-filter]:bg-background/40 shadow-sm transition-all duration-300">
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
                 {/* Mobile Menu */}
                 <Button variant="ghost" size="icon" className="md:hidden">
@@ -19,8 +19,8 @@ export function Header() {
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-primary">
-                        Vita<span className="text-secondary">Nova</span>
+                    <span className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                        Vita<span className="text-[#C5A028]">Nova</span>
                     </span>
                 </Link>
 
